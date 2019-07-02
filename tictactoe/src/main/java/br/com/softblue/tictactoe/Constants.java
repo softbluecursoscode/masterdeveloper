@@ -1,4 +1,4 @@
-package br.com.tictactoe;
+package br.com.softblue.tictactoe;
 
 public class Constants {
 	

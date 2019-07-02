@@ -1,6 +1,6 @@
-package br.com.tictactoe.score;
+package br.com.softblue.tictactoe.score;
 
-import br.com.tictactoe.game.Player;
+import br.com.softblue.tictactoe.game.Player;
 
 public interface ScoreManager {
 

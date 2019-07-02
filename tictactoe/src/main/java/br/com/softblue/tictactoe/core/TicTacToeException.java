@@ -1,4 +1,4 @@
-package br.com.tictactoe.core;
+package br.com.softblue.tictactoe.core;
 
 @SuppressWarnings("serial")
 public class TicTacToeException extends Exception {

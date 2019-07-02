@@ -1,6 +1,6 @@
-package br.com.tictactoe.score;
+package br.com.softblue.tictactoe.score;
 
-import br.com.tictactoe.core.TicTacToeException;
+import br.com.softblue.tictactoe.core.TicTacToeException;
 
 @SuppressWarnings("serial")
 public class ScoreException extends TicTacToeException {

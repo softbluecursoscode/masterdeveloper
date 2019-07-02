@@ -1,6 +1,6 @@
-package br.com.tictactoe.game;
+package br.com.softblue.tictactoe.game;
 
-import br.com.tictactoe.core.TicTacToeException;
+import br.com.softblue.tictactoe.core.TicTacToeException;
 
 @SuppressWarnings("serial")
 public class InvalidMoveException extends TicTacToeException {

@@ -1,15 +1,15 @@
-package br.com.tictactoe.core;
+package br.com.softblue.tictactoe.core;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.tictactoe.Constants;
-import br.com.tictactoe.game.Board;
-import br.com.tictactoe.game.InvalidMoveException;
-import br.com.tictactoe.game.Player;
-import br.com.tictactoe.score.FileScoreManager;
-import br.com.tictactoe.score.ScoreManager;
-import br.com.tictactoe.ui.UI;
+import br.com.softblue.tictactoe.Constants;
+import br.com.softblue.tictactoe.game.Board;
+import br.com.softblue.tictactoe.game.InvalidMoveException;
+import br.com.softblue.tictactoe.game.Player;
+import br.com.softblue.tictactoe.score.FileScoreManager;
+import br.com.softblue.tictactoe.score.ScoreManager;
+import br.com.softblue.tictactoe.ui.UI;
 
 public class Game {
 	private Board board = new Board();

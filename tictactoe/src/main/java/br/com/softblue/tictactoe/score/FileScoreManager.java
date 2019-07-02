@@ -1,4 +1,4 @@
-package br.com.tictactoe.score;
+package br.com.softblue.tictactoe.score;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.tictactoe.game.Player;
+import br.com.softblue.tictactoe.game.Player;
 
 public class FileScoreManager implements ScoreManager {
 	

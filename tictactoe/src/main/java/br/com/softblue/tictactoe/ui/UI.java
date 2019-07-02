@@ -1,4 +1,4 @@
-package br.com.tictactoe.ui;
+package br.com.softblue.tictactoe.ui;
 
 import br.com.softblue.commons.io.Console;
 

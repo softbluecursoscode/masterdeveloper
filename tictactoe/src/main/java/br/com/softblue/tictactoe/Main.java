@@ -1,6 +1,6 @@
-package br.com.tictactoe;
+package br.com.softblue.tictactoe;
 
-import br.com.tictactoe.core.Game;
+import br.com.softblue.tictactoe.core.Game;
 
 public class Main {
 	public static void main(String[] args) throws Exception {

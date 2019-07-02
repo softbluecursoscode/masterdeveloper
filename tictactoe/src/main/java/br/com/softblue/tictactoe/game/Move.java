@@ -1,4 +1,4 @@
-package br.com.tictactoe.game;
+package br.com.softblue.tictactoe.game;
 
 public class Move {
 
