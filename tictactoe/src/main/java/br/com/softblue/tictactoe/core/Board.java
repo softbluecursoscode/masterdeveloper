@@ -1,4 +1,4 @@
-package br.com.softblue.tictactoe.game;
+package br.com.softblue.tictactoe.core;
 
 import br.com.softblue.tictactoe.Constants;
 import br.com.softblue.tictactoe.ui.UI;
@@ -6,78 +6,71 @@ import br.com.softblue.tictactoe.ui.UI;
 public class Board {
 
 	private char[][] matrix;
-
+	
 	public Board() {
 		matrix = new char[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
-
-		// Zera todos os elementos da matriz
 		clear();
 	}
-
+	
 	public void clear() {
 		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
+			for (int j = 0; j < matrix[i].length; j++) {
 				matrix[i][j] = ' ';
 			}
 		}
 	}
-
+	
 	public void print() {
 		UI.printNewLine();
 		
 		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
-				UI.printTextWithNoNewLine(matrix[i][j]);
-				if (j < matrix[0].length - 1) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				UI.printTextWithNoNewLine(String.valueOf(matrix[i][j]));
+				
+				if (j < matrix[i].length - 1) {
 					UI.printTextWithNoNewLine(" | ");
 				}
 			}
+			
 			UI.printNewLine();
-
+			
 			if (i < matrix.length - 1) {
 				UI.printText("---------");
 			}
 		}
-		
-		UI.printNewLine();
 	}
-
+	
 	public boolean isFull() {
 		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
+			for (int j = 0; j < matrix[i].length; j++) {
 				if (matrix[i][j] == ' ') {
 					return false;
 				}
 			}
 		}
+		
 		return true;
 	}
-
+	
 	public boolean play(Player player, Move move) throws InvalidMoveException {
 		int i = move.getI();
 		int j = move.getJ();
-
-		// Verifica se a jogada está fora dos limites da matriz
-		if (i < 0 || j < 0 || i >= matrix.length || j >= matrix[0].length) {
-			throw new InvalidMoveException("A jogada é inválida");
+		
+		if (i < 0 || j < 0 || i >= Constants.BOARD_SIZE || j >= Constants.BOARD_SIZE) {
+			throw new InvalidMoveException("O intervalo da jogada é inválido");
 		}
-
-		// Verifica se a jogada já não foi realizada
+		
 		if (matrix[i][j] != ' ') {
 			throw new InvalidMoveException("Esta jogada já foi realizada");
 		}
-
-		// Coloca o símbolo na posição especificada
+		
 		matrix[i][j] = player.getSymbol();
-
-		// Verifica se houve uma sequência
-		return checkRows() || checkColumns() || checkDiagonal1() || checkDiagonal2();
+		return checkRows(player) || checkCols(player) || checkDiagonal1(player) || checkDiagonal2(player);
 	}
-
 	
-	private boolean checkRows() {
+	private boolean checkRows(Player player) {
 		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
-			if (checkRow(i)) {
+			if (checkRow(i, player)) {
 				return true;
 			}
 		}
@@ -85,38 +78,10 @@ public class Board {
 		return false;
 	}
 	
-	private boolean checkRow(int i) {
-		char symbol = matrix[i][0];
-		if (symbol == ' ') {
-			return false;
-		}
+	private boolean checkRow(int i, Player player) {
+		char symbol = player.getSymbol();
 		
-		for (int j = 1; j < Constants.BOARD_SIZE; j++) {
-			if (matrix[i][j] != symbol) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-	private boolean checkColumns() {
 		for (int j = 0; j < Constants.BOARD_SIZE; j++) {
-			if (checkColumn(j)) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	private boolean checkColumn(int j) {
-		char symbol = matrix[0][j];
-		if (symbol == ' ') {
-			return false;
-		}
-		
-		for (int i = 1; i < Constants.BOARD_SIZE; i++) {
 			if (matrix[i][j] != symbol) {
 				return false;
 			}
@@ -125,13 +90,32 @@ public class Board {
 		return true;
 	}
 	
-	private boolean checkDiagonal1() {
-		char symbol = matrix[0][0];
-		if (symbol == ' ') {
-			return false;
+	private boolean checkCols(Player player) {
+		for (int j = 0; j < Constants.BOARD_SIZE; j++) {
+			if (checkCol(j, player)) {
+				return true;
+			}
 		}
 		
-		for (int i = 1; i < Constants.BOARD_SIZE; i++) {
+		return false;
+	}
+	
+	private boolean checkCol(int j, Player player) {
+		char symbol = player.getSymbol();
+		
+		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+			if (matrix[i][j] != symbol) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	private boolean checkDiagonal1(Player player) {
+		char symbol = player.getSymbol();
+		
+		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
 			if (matrix[i][i] != symbol) {
 				return false;
 			}
@@ -140,15 +124,11 @@ public class Board {
 		return true;
 	}
 	
-	private boolean checkDiagonal2() {
+	private boolean checkDiagonal2(Player player) {
+		char symbol = player.getSymbol();
 		int lastLine = Constants.BOARD_SIZE - 1;
-		char symbol = matrix[lastLine][0];
-		if (symbol == ' ') {
-			return false;
-		}
 		
-		int i, j;
-		for (i = lastLine - 1, j = 1; i >= 0; i--, j++) {
+		for (int i = lastLine, j = 0; i >= 0; i--, j++) {
 			if (matrix[i][j] != symbol) {
 				return false;
 			}

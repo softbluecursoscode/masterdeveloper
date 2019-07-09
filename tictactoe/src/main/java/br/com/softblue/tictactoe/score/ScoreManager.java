@@ -1,10 +1,13 @@
 package br.com.softblue.tictactoe.score;
 
-import br.com.softblue.tictactoe.game.Player;
+import java.io.IOException;
+
+import br.com.softblue.tictactoe.core.Player;
 
 public interface ScoreManager {
 
 	public Integer getScore(Player player);
 	
-	public void saveScore(Player player) throws ScoreException;
+	public void saveScore(Player player) throws IOException;
+	
 }

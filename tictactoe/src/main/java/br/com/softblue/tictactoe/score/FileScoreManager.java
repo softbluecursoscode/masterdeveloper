@@ -2,92 +2,65 @@ package br.com.softblue.tictactoe.score;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-import br.com.softblue.tictactoe.game.Player;
+import br.com.softblue.tictactoe.core.Player;
 
 public class FileScoreManager implements ScoreManager {
-	
-	private static final String SCORE_FILE = "score.txt";
-	private Map<String, Integer> scoreMap = new HashMap<String, Integer>();
 
-	public FileScoreManager() throws ScoreException {
+	private static final Path SCORE_FILE = Path.of("score.txt");
+	private Map<String, Integer> scoreMap = new HashMap<>();
+	
+	public FileScoreManager() throws IOException {
 		setup();
 	}
-
-	private void setup() throws ScoreException {
-		// Verifica se o arquivo existe. Caso não exista, cria
-		File file = new File(SCORE_FILE);
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				throw new ScoreException(e.getMessage());
-			}
+	
+	private void setup() throws IOException {
+		if (!Files.exists(SCORE_FILE)) {
+			Files.createFile(SCORE_FILE);
 		}
-
-		BufferedReader reader = null;
-
-		try {
-			// Utiliza um BufferedReader para ler o arquivo
-			
-			reader = new BufferedReader(new FileReader(file));
+		
+		try (BufferedReader reader = Files.newBufferedReader(SCORE_FILE)) {
 			String line;
-
+			
 			while ((line = reader.readLine()) != null) {
-				// O método split divide a linha em duas, onde cada token é separado por um '|'
 				String[] tokens = line.split("\\|");
 				
-				// Adiciona a pontuação lida no map
-				scoreMap.put(tokens[0].toUpperCase(), Integer.valueOf(tokens[1]));
-			}
-		
-		} catch (IOException e) {
-			throw new ScoreException(e.getMessage());
-		
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					throw new ScoreException(e.getMessage());
-				}
+				scoreMap.put(tokens[0], Integer.parseInt(tokens[1]));
 			}
 		}
+
 	}
-	
+
+	@Override
 	public Integer getScore(Player player) {
 		return scoreMap.get(player.getName().toUpperCase());
 	}
 
-	public void saveScore(Player player) throws ScoreException {
-		// Lê a pontuação do jogador
+	@Override
+	public void saveScore(Player player) throws IOException {
 		Integer score = getScore(player);
-
+		
 		if (score == null) {
 			score = 0;
 		}
-
-		// Incrementa a pontuação do jogador e recoloca no map
+		
 		scoreMap.put(player.getName().toUpperCase(), score + 1);
-
-		// Utiliza um BufferedWriter para armazenar as entradas do map no arquivo
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(SCORE_FILE))) {
-			for (Map.Entry<String, Integer> entry : scoreMap.entrySet()) {
-				// Escreve a linha no arquivo no formato '<nome>|<pontuação>'
-				writer.write(entry.getKey() + "|" + entry.getValue());
-				
-				// Insere uma quebra de linha
+		
+		try (BufferedWriter writer = Files.newBufferedWriter(SCORE_FILE)) {
+			Set<Map.Entry<String, Integer>> entries = scoreMap.entrySet();
+			
+			for (Map.Entry<String, Integer> entry : entries) {
+				String name = entry.getKey().toUpperCase();
+				Integer s = entry.getValue();
+				writer.write(name + "|" + s);
 				writer.newLine();
 			}
-		
-		} catch (IOException e) {
-			throw new ScoreException(e.getMessage());
 		}
 	}
 }

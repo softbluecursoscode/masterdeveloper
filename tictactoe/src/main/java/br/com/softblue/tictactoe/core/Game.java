@@ -1,92 +1,99 @@
 package br.com.softblue.tictactoe.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 import br.com.softblue.tictactoe.Constants;
-import br.com.softblue.tictactoe.game.Board;
-import br.com.softblue.tictactoe.game.InvalidMoveException;
-import br.com.softblue.tictactoe.game.Player;
 import br.com.softblue.tictactoe.score.FileScoreManager;
 import br.com.softblue.tictactoe.score.ScoreManager;
 import br.com.softblue.tictactoe.ui.UI;
 
 public class Game {
-	private Board board = new Board();
-	private ScoreManager scoreManager;
-	private List<Player> players = new ArrayList<>();
-	private int currentPlayerIndex = -1;
 
-	public void play() throws TicTacToeException {
-		UI.printGameTitle();
-		scoreManager = new FileScoreManager();
+	private Board board = new Board();
+	private Player[] players = new Player[Constants.SYMBOL_PLAYERS.length];
+	private int currentPlayerIndex = -1;
+	private ScoreManager scoreManager;
+	
+	public void play() throws IOException {
+		scoreManager = createScoreManager();
 		
-		for (int i = 0; i < Constants.SYMBOL_PLAYERS.length; i++) {
-			players.add(createPlayer(i));
+		UI.printGameTitle();
+		
+		for (int i = 0; i < players.length; i++) {
+			players[i] = createPlayer(i);
 		}
 		
 		boolean gameEnded = false;
-		Player winner = null;
 		Player currentPlayer = nextPlayer();
-
-		while (!gameEnded) {
+		Player winner = null;
+		
+		while(!gameEnded) {
 			board.print();
-
+			
 			boolean sequenceFound;
 			try {
-				// Solicita jogada ao jogador
-				sequenceFound = currentPlayer.play();
+				 sequenceFound = currentPlayer.play();
 			
 			} catch (InvalidMoveException e) {
-				// Se a jogada foi inválida, mostra o erro e solicita a jogada novamente
-				UI.printText("Erro: " + e.getMessage());
+				UI.printText("ERRO: " + e.getMessage());
 				continue;
 			}
-
+			
 			if (sequenceFound) {
-				winner = currentPlayer;
 				gameEnded = true;
-
+				winner = currentPlayer;
+			
 			} else if (board.isFull()) {
 				gameEnded = true;
+			
+			} else {
+				currentPlayer = nextPlayer();
 			}
-
-			currentPlayer = nextPlayer();
 		}
-
-		UI.printNewLine();
-
+		
 		if (winner == null) {
-			UI.printText("O jogo terminou empatado!");
+			UI.printText("O jogo terminou empatado");
 		
 		} else {
 			UI.printText("O jogador '" + winner.getName() + "' venceu o jogo!");
-
-			// O jogador que venceu tem sua pontuação gravada
+			
 			scoreManager.saveScore(winner);
 		}
-
+		
 		board.print();
-		UI.printText("Fim de Jogo!");
+		UI.printText("Fim do Jogo!");
 	}
 	
-	private Player createPlayer(int index) throws TicTacToeException {
-		String name = UI.readInput("Nome do jogador " + (index + 1) + ":");
-		Player player = new Player(board, name, Constants.SYMBOL_PLAYERS[index]);
-		
-		UI.printText("O jogador '%s' vai usar o símbolo '%s'", player.getName(), player.getSymbol());
+	private Player createPlayer(int index) {
+		String name = UI.readInput("Jogador " + (index + 1) + " =>");
+		char symbol = Constants.SYMBOL_PLAYERS[index];
+		Player player = new Player(name, board, symbol);
 		
 		Integer score = scoreManager.getScore(player);
 		
 		if (score != null) {
-			UI.printText("O jogador '%s' já possui %d %s!\n", player.getName(), score, score == 1 ? "vitória" : "vitórias");
+			UI.printText("O jogador '" + player.getName() + "' já possui " + score + " vitória(s)!");
 		}
+		
+		UI.printText("O jogador '" + name + "' vai usar o símbolo '" + symbol + "'");
 		
 		return player;
 	}
 	
 	private Player nextPlayer() {
-		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
-		return players.get(currentPlayerIndex);
+		/*
+		currentPlayerIndex++;
+		
+		if (currentPlayerIndex >= players.length) {
+			currentPlayerIndex = 0;
+		}
+		*/
+		
+		currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+		return players[currentPlayerIndex];
+	}
+	
+	private ScoreManager createScoreManager() throws IOException {
+		return new FileScoreManager();
 	}
 }

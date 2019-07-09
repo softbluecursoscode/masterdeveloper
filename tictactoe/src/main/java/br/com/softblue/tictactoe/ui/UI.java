@@ -4,17 +4,12 @@ import br.com.softblue.commons.io.Console;
 
 public class UI {
 
-	public static void printText(Object text) {
+	public static void printText(String text) {
 		System.out.println(text);
 	}
 	
-	public static void printTextWithNoNewLine(Object text) {
+	public static void printTextWithNoNewLine(String text) {
 		System.out.print(text);
-	}
-	
-	public static void printText(String text, Object...params) {
-		System.out.format(text, params);
-		printNewLine();
 	}
 	
 	public static void printNewLine() {
