@@ -9,36 +9,35 @@ import br.com.softblue.jogoforca.core.Word;
 import br.com.softblue.jogoforca.ui.UI;
 
 public class Game {
-	private static final int MAX_ERRORS = 5;
 	
+	private static final int MAX_ERRORS = 5;
+
 	public void start() {
-		Set<Character> usedChars = new HashSet<>();
+		UI.print("Bem Vindo ao Jogo da Forca!");
 		
-		// Número atual de erros do usuário
-		int errorCount = 0;
-		
-		// Sorteia uma nova palavra
 		Dictionary dictionary = Dictionary.getInstance();
 		Word word = dictionary.nextWord();
 		
-		UI.print("Bem vindo ao Jogo da Forca!");
 		UI.print("A palavra tem " + word.size() + " letras");
+		
+		Set<Character> usedChars = new HashSet<>();
+		int errorCount = 0;
 		
 		while (true) {
 			UI.print(word);
 			UI.printNewLine();
 			
-			char letra;
+			char c;
 			try {
-				letra = UI.readChar("Digite uma letra:");
+				c = UI.readChar("Digite uma letra:");
 				
-				if (usedChars.contains(letra)) {
+				if (usedChars.contains(c)) {
 					throw new InvalidCharacterException("Esta letra já foi utilizada");
 				}
 				
-				usedChars.add(letra);
+				usedChars.add(c);
 				
-				if (word.hasChar(letra)) {
+				if (word.hasChar(c)) {
 					UI.print("Você acertou uma letra!");
 				
 				} else {
@@ -50,23 +49,23 @@ public class Game {
 				}
 				
 				UI.printNewLine();
-
+				
 				if (word.discovered()) {
-					UI.print("Parabéns! Você acertou a palavra completa: " + word.getOriginalWord());
+					UI.print("PARABÉNS! Você acertou a palavra correta: " + word.getOriginalWord());
 					UI.print("Fim do Jogo!");
 					break;
 				}
 				
 				if (errorCount == MAX_ERRORS) {
-					UI.print("Você perdeu o jogo! A palavra correta era " + word.getOriginalWord());
+					UI.print("Você perdeu o jogo! A palavra correta era: " + word.getOriginalWord());
 					UI.print("Fim do Jogo!");
 					break;
 				}
-				
+			
 			} catch (InvalidCharacterException e) {
 				UI.print("Erro: " + e.getMessage());
 				UI.printNewLine();
 			}
-		}	
+		}
 	}
 }

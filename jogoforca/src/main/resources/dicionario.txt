@@ -1,11 +1,7 @@
 classe
 objeto
-exception
-string
-stream
-wrapper
-interface
-encapsulamento
+heranca
 polimorfismo
-sobrescrita
+encapsulamento
 sobrecarga
+sobrescrita

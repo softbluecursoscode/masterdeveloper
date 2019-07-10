@@ -6,21 +6,43 @@ import java.util.Set;
 public class Word {
 
 	private static final char SECRET_CHAR = '_';
-
+	
 	private String originalWord;
 	private Set<Character> foundChars = new HashSet<>();
+	private Set<Character> wordChars = new HashSet<>();
+	
 
 	public Word(String originalWord) {
 		this.originalWord = originalWord.toUpperCase();
+		
+		char[] chars = this.originalWord.toCharArray();
+		for (char c : chars) {
+			wordChars.add(c);
+		}
+	}
+
+	public int size() {
+		return originalWord.length();
+	}
+	
+	public boolean hasChar(char c) {
+		c = Character.toUpperCase(c);
+		if (originalWord.indexOf(c) > -1) {
+			foundChars.add(c);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		char[] letrasArray = originalWord.toCharArray();
 		
-		for (int i = 0; i < letrasArray.length; i++) {
-			char c = letrasArray[i];
+		char[] charArray = originalWord.toCharArray();
+		
+		for (int i = 0; i < charArray.length; i++) {
+			char c = charArray[i];
 			
 			if (foundChars.contains(c)) {
 				sb.append(c);
@@ -30,32 +52,12 @@ public class Word {
 			
 			sb.append(" ");
 		}
-
-		return sb.toString().trim();
-	}
-	
-	public int size() {
-		return originalWord.length();
-	}
-
-	public boolean hasChar(char c) {
-		if (originalWord.indexOf(c) > -1) {
-			foundChars.add(c);
-			return true;
-		}
 		
-		return false;
+		return sb.toString();
 	}
 	
 	public boolean discovered() {
-		char[] chars = originalWord.toCharArray();
-		Set<Character> set = new HashSet<>();
-		
-		for (int i = 0; i < chars.length; i++) {
-			set.add(chars[i]);
-		}
-
-		return set.equals(foundChars);
+		return foundChars.equals(wordChars);
 	}
 	
 	public String getOriginalWord() {
