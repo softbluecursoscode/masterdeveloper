@@ -3,6 +3,7 @@ package br.com.softblue.jogoforca.game;
 import java.util.HashSet;
 import java.util.Set;
 
+import br.com.softblue.jogoforca.core.Config;
 import br.com.softblue.jogoforca.core.Dictionary;
 import br.com.softblue.jogoforca.core.InvalidCharacterException;
 import br.com.softblue.jogoforca.core.Word;
@@ -10,18 +11,25 @@ import br.com.softblue.jogoforca.ui.UI;
 
 public class Game {
 	
-	private static final int MAX_ERRORS = 5;
-
-	public void start() {
+	public void start(String[] args) {
 		UI.print("Bem Vindo ao Jogo da Forca!");
 		
 		Dictionary dictionary = Dictionary.getInstance();
+		UI.print("Dicionário usado: " + dictionary.getName());
+		
 		Word word = dictionary.nextWord();
 		
 		UI.print("A palavra tem " + word.size() + " letras");
 		
 		Set<Character> usedChars = new HashSet<>();
 		int errorCount = 0;
+		
+		if (args.length > 0) {
+			Config.setMaxErrors(args[0]);
+		}
+		
+		int maxErrors = Integer.parseInt(Config.get("maxErrors"));
+		UI.print("Você pode errar no máximo " + maxErrors + " vez(es)");
 		
 		while (true) {
 			UI.print(word);
@@ -43,8 +51,8 @@ public class Game {
 				} else {
 					errorCount++;
 					
-					if (errorCount < MAX_ERRORS) {
-						UI.print("Você errou! Você ainda pode errar " + (MAX_ERRORS - errorCount) + " vez(es)");
+					if (errorCount < maxErrors) {
+						UI.print("Você errou! Você ainda pode errar " + (maxErrors - errorCount) + " vez(es)");
 					}
 				}
 				
@@ -56,7 +64,7 @@ public class Game {
 					break;
 				}
 				
-				if (errorCount == MAX_ERRORS) {
+				if (errorCount == maxErrors) {
 					UI.print("Você perdeu o jogo! A palavra correta era: " + word.getOriginalWord());
 					UI.print("Fim do Jogo!");
 					break;
