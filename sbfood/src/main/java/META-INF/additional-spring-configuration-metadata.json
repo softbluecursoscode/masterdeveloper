@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "bluefood.upload.dir",
+    "type": "java.lang.String",
+    "description": "A description for 'bluefood.upload.dir'"
+  },
+  {
+    "name": "bluefood.upload.logotipo",
+    "type": "java.lang.String",
+    "description": "A description for 'bluefood.upload.logotipo'"
+  },
+  {
+    "name": "bluefood.upload.categorias",
+    "type": "java.lang.String",
+    "description": "A description for 'bluefood.upload.categorias'"
+  },
+  {
+    "name": "bluefood.upload.comidas",
+    "type": "java.lang.String",
+    "description": "A description for 'bluefood.upload.comidas'"
+  }
+]}
