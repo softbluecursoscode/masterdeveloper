@@ -25,11 +25,10 @@ div#divUsuarioLogado
 {
 	background-color: #7BC2E5;
 	width: 100%;
-	height: 40px;
+	height: auto;
 	line-height: 40px;
 	color: #ffffff;
 }
-
 
 img#imgLogotipoSistema
 {
@@ -37,6 +36,10 @@ img#imgLogotipoSistema
     vertical-align: middle;
 }
 
+img#imgIconeCarrinho
+{
+	height: 50px;
+}
 
 div#divCategoriasComidaGeral
 {
@@ -209,6 +212,13 @@ div#mensagemDeErro
 	border-radius: 5px;
 	padding: 10px;
 	color: #ffffff;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#imagemDeErro
+{
+	width: 400px;
 	margin-left: auto;
 	margin-right: auto;
 }

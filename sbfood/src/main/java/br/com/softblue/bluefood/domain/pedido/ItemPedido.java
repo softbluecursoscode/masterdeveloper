@@ -1,6 +1,7 @@
 package br.com.softblue.bluefood.domain.pedido;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -33,7 +34,13 @@ public class ItemPedido implements Serializable {
 	@NotNull
 	private Integer quantidade;
 	
+	@NotNull
+	private BigDecimal preco;
+	
 	@Size(max = 50)
 	private String observacoes;
 
+	public BigDecimal getPrecoCalculado() {
+		return preco.multiply(BigDecimal.valueOf(quantidade));
+	}
 }

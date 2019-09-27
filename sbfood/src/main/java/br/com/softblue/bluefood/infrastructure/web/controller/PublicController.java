@@ -3,7 +3,6 @@ package br.com.softblue.bluefood.infrastructure.web.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,7 +16,6 @@ import br.com.softblue.bluefood.application.service.RestauranteService;
 import br.com.softblue.bluefood.domain.cliente.Cliente;
 import br.com.softblue.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.softblue.bluefood.domain.restaurante.Restaurante;
-import br.com.softblue.bluefood.domain.restaurante.RestauranteRepository;
 
 @Controller
 @RequestMapping(path = "/public")
@@ -27,18 +25,15 @@ public class PublicController {
 	private ClienteService clienteService;
 	
 	@Autowired
-	private RestauranteRepository restauranteRepository;
-	
-	@Autowired
 	private RestauranteService restauranteService;
 	
 	@Autowired
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
 	
 	@GetMapping(path = "/cliente/new")
-	public String createNew(Model model) {
+	public String newCliente(Model model) {
 		model.addAttribute("cliente", new Cliente());
-		defineCreateMode(model);
+		ControllerHelper.setEditMode(model, false);
 		return "cliente-cadastro";
 	}
 
@@ -54,14 +49,15 @@ public class PublicController {
 			}
 		}
 		
-		defineCreateMode(model);
+		ControllerHelper.setEditMode(model, false);
 		return "cliente-cadastro";
 	}
 
 	@GetMapping(path = "/restaurante/new")
-	public String load(Model model) {
-		model.addAttribute("restaurante", restauranteRepository.findById(1).orElse(null));
-		addCategoriasToRequest(model);
+	public String newRestaurante(Model model) {
+		model.addAttribute("restaurante", new Restaurante());
+		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
+		ControllerHelper.setEditMode(model, false);
 		return "restaurante-cadastro";
 	}
 
@@ -77,15 +73,8 @@ public class PublicController {
 			}
 		}
 		
-		addCategoriasToRequest(model);
+		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
+		ControllerHelper.setEditMode(model, false);
 		return "restaurante-cadastro";
-	}
-	
-	private void addCategoriasToRequest(Model model) {
-		model.addAttribute("categorias", categoriaRestauranteRepository.findAll(new Sort(Sort.Direction.ASC, "nome")));
-	}
-	
-	private void defineCreateMode(Model model) {
-		model.addAttribute("editMode", false);
 	}
 }

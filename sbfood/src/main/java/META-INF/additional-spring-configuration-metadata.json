@@ -1,22 +1,27 @@
 {"properties": [
   {
-    "name": "bluefood.upload.dir",
+    "name": "bluefood.files.logotipo",
     "type": "java.lang.String",
-    "description": "A description for 'bluefood.upload.dir'"
+    "description": "A description for 'bluefood.files.logotipo'"
   },
   {
-    "name": "bluefood.upload.logotipo",
+    "name": "bluefood.files.categorias",
     "type": "java.lang.String",
-    "description": "A description for 'bluefood.upload.logotipo'"
+    "description": "A description for 'bluefood.files.categorias'"
   },
   {
-    "name": "bluefood.upload.categorias",
+    "name": "bluefood.files.comidas",
     "type": "java.lang.String",
-    "description": "A description for 'bluefood.upload.categorias'"
+    "description": "A description for 'bluefood.files.comidas'"
   },
   {
-    "name": "bluefood.upload.comidas",
+    "name": "bluefood.sbpay.url",
     "type": "java.lang.String",
-    "description": "A description for 'bluefood.upload.comidas'"
+    "description": "A description for 'bluefood.sbpay.url'"
+  },
+  {
+    "name": "bluefood.sbpay.token",
+    "type": "java.lang.String",
+    "description": "A description for 'bluefood.sbpay.token'"
   }
 ]}

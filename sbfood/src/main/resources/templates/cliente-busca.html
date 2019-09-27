@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/cliente/home}">
 
 <body>
 	<div layout:fragment="content">
@@ -20,7 +20,7 @@
 				<input type="hidden" name="categoriaId" th:field="*{categoriaId}" />			
 				<div id="divCategoriasComidaOpcao" th:each="categoria: ${categorias}">
 					<a href="#" th:onclick="'searchRest(\'' + ${categoria.id} + '\');'">
-						<img th:src="@{/categoria/img/} + ${categoria.imagem}" id="imgCategoriaComida"><br />
+						<img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaComida"><br />
 						<span th:text="${categoria.nome}"></span>
 					</a>
 				</div>
@@ -50,7 +50,7 @@
 			<div id="divCategoriasComidaGeral">
 				<div id="divRestaurantesOpcao" th:each="restaurante: ${restaurantes}">
 					<a href="#" th:onclick="'window.location.href = \'' + @{/cliente/restaurante} + '?restauranteId=' + ${restaurante.id} + '\''">
-						<img th:src="@{/cliente/img/} + ${restaurante.logotipo}" id="imgRestauranteOpcao" /><br />
+						<img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" id="imgRestauranteOpcao" /><br />
 						<span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span><br />
 						<span th:text="${restaurante.categoriasAsText}"></span><br />
 						<span th:text="'Tempo de entrega: ' + ${restaurante.calcularTempoEntrega(cep)} + ' min'"></span><br />

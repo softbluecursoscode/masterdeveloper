@@ -29,4 +29,8 @@ public class Cliente extends Usuario implements Serializable {
 	@Column(length = 8)
 	@Pattern(regexp = "[0-9]{8}", message = "O CEP possui formato inválido")
 	private String cep;
+	
+	public String getFormattedCep() {
+		return cep.substring(0, 5) + "-" + cep.substring(5);
+	}
 }

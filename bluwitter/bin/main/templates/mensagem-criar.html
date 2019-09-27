@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>Bluwitter</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bluwitterEstilo.css}" />
+	</head>
+	<body>
+		<header>
+			<div class="divTopo">
+				<img th:src="@{/images/Logotipo.png}" class="imagemLogotipo" />
+			</div>
+		</header>
+		<!-- Cabeçalho - Fim -->
+		<div class="divCorpoPrincipal">
+
+			<!-- Postagem -->
+			<form method="post" th:action="@{/mensagem/criar}" th:object="${mensagem}">
+				<div class="divPostagem">
+					<div class="divCriarPostagem">
+						<select class="selectCriarMensagem" th:field="*{usuario.id}">
+							<option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nome} + ' (' + ${u.formattedId} + ')'"></option>
+						</select>
+						<br />
+						<textarea class="textareaCriarMensagem" placeholder="No que está pensando?" th:field="*{texto}"></textarea>
+					</div>
+				</div>
+				<!-- Fim de postagem --> 
+				
+				
+				<input type="button" value="Cancelar" class="buttonCancelar" th:onclick="'window.location.href=\'' + @{/mensagem/listar} + '\';'" />
+				<input type="submit" value="Criar" class="buttonCriar" />
+			</form>
+		</div>
+		<!-- Rodapé - Início -->
+	</body>
+</html>
+

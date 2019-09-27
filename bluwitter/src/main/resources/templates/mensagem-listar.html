@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>Bluwitter</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bluwitterEstilo.css}">
+	</head>
+	<body>
+		<header>
+			<div class="divTopo">
+				<img th:src="@{/images/Logotipo.png}" class="imagemLogotipo">
+			</div>
+		</header>
+		<!-- Cabeçalho - Fim -->
+		<div class="divCorpoPrincipal">
+
+			<!-- Postagem -->
+			<div class="divPostagem" th:each="mensagem : ${mensagens}">
+				<div class="divPostagemImagemUsuario">
+					<img th:src="@{/images/usuario_} + ${mensagem.usuario.id} + '.png'" class="imagemUsuario">
+				</div>
+				<div class="divPostagemMensagem">
+					<p class="pTextoPostagem">
+						<span class="spanAutor" th:text="${mensagem.usuario.nome}"></span>
+						<span class="spanInfo" th:text="${mensagem.usuario.formattedId} + ' - ' + ${mensagem.calcularTempoMinutos()} + 'm'"></span>
+						<br>
+						<span th:text="${mensagem.texto}"></span>
+						<br>
+						<a th:href="@{/mensagem/curtir} + '?msgId=' + ${mensagem.id}"><img th:src="@{/images/IconeGostar.png}" class="imagemIconeGostar"></a>
+						<span class="spanCurtidas" th:text="${mensagem.curtidas}"></span>
+					</p>
+				</div>
+			</div>
+			<!-- Fim de postagem -->
+			
+			<input type="button" value="Criar" class="buttonCriar" th:onclick="'window.location.href=\'' + @{/mensagem/nova} + '\';'" />
+			
+		</div>
+		<!-- Rodapé - Início -->
+	</body>
+</html>
+

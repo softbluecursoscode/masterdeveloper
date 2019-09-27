@@ -3,8 +3,8 @@ package br.com.softblue.bluefood.domain.pedido;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,18 +32,39 @@ import lombok.Setter;
 public class Pedido implements Serializable {
 	
 	public enum Status {
-		Producao("Em produção"),
-		Entrega("Saiu para entrega"),
-		Concluido("Concluído");
+		Producao(1, "Em produção", false),
+		Entrega(2, "Saiu para entrega", false),
+		Concluido(3, "Concluído", true);
 		
+		int ordem;
 		String descricao;
+		boolean ultimo;
 		
-		Status(String descricao) {
+		Status(int ordem, String descricao, boolean ultimo) {
+			this.ordem = ordem;
 			this.descricao = descricao;
+			this.ultimo = ultimo;
+		}
+		
+		public int getOrdem() {
+			return ordem;
 		}
 		
 		public String getDescricao() {
 			return descricao;
+		}
+		
+		public boolean isUltimo() {
+			return ultimo;
+		}
+		
+		public static Status fromOrdem(int ordem) {
+			for (Status status : Status.values()) {
+				if (status.getOrdem() == ordem) {
+					return status;
+				}
+			}
+			return null;
 		}
 	}
 
@@ -77,10 +98,19 @@ public class Pedido implements Serializable {
 	private BigDecimal total;
 	
 	@OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER)
-	private List<ItemPedido> itens = new ArrayList<>();
+	private Set<ItemPedido> itens = new LinkedHashSet<>();
 	
 	
 	public String getFormattedId() {
 		return String.format("#%04d", id);
+	}
+	
+	public void definirProximoStatus() {
+		int ordem = status.getOrdem();
+		Status newStatus = Status.fromOrdem(ordem + 1);
+		
+		if (newStatus != null) {
+			this.status = newStatus;
+		}
 	}
 }

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/cliente/home}">
 <body>
 	<div layout:fragment="content">
 		<div>
-			<img th:src="@{/cliente/img/} + ${restaurante.logotipo}" id="imgRestauranteBusca" /><br /><br />
+			<img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" id="imgRestauranteBusca" /><br /><br />
 			<span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span><br />
 			<span id="restauranteOpcaoCategoria" th:text="${restaurante.categoriasAsText}"></span><br />
 			<span id="restauranteOpcaoTempo" th:text="'Tempo de entrega: ' + ${restaurante.calcularTempoEntrega(cep)} + ' min'"></span><br />
@@ -37,12 +37,12 @@
 		
 		<div id="divCategoriasComidaGeral" th:each="itemCardapio : ${itensCardapioDestaque}" style="margin-top: 20px;">
 			<div id="divRestaurantesOpcao">
-				<img th:src="@{/cliente/img/comida/} + ${itemCardapio.imagem}" id="imgRestauranteOpcao" /><br />
+				<img th:src="@{/images/comida/} + ${itemCardapio.imagem}" id="imgRestauranteOpcao" /><br />
 				<span id="restauranteOpcaoTitulo" th:text="${itemCardapio.nome}"></span><br />
 				<span th:text="${itemCardapio.descricao}"></span><br />
 				<span th:text="${#numbers.formatCurrency(itemCardapio.preco)}"></span><br /><br />
 				<form method="get" th:action="@{/cliente/carrinho/adicionar}">
-					<input type="hidden" name="restauranteId" th:value="${restaurante.id}" />
+					<input type="hidden" name="itemId" th:value="${itemCardapio.id}" />
 					<label for="quantidade">Quantidade: </label>
 					<select name="quantidade" id="quantidade">
 						<option>1</option>
@@ -50,6 +50,9 @@
 						<option>3</option>
 						<option>4</option>
 					</select><br /><br />
+					Observações:
+					<br />
+					<textarea name="observacoes"></textarea><br /><br />
 					<input type="submit" value="Adicionar ao carrinho" />
 				</form>
 			</div>
@@ -65,12 +68,12 @@
 		
 		<div id="divCategoriasComidaGeral" th:each="itemCardapio : ${itensCardapioNaoDestaque}" style="margin-top: 20px;">
 			<div id="divRestaurantesOpcao">
-				<img th:src="@{/cliente/img/comida/} + ${itemCardapio.imagem}" id="imgRestauranteOpcao" /><br />
+				<img th:src="@{/images/comida/} + ${itemCardapio.imagem}" id="imgRestauranteOpcao" /><br />
 				<span id="restauranteOpcaoTitulo" th:text="${itemCardapio.nome}"></span><br />
 				<span th:text="${itemCardapio.descricao}"></span><br />
 				<span th:text="${#numbers.formatCurrency(itemCardapio.preco)}"></span><br /><br />
 				<form method="get" th:action="@{/cliente/carrinho/adicionar}">
-					<input type="hidden" name="restauranteId" th:value="${restaurante.id}" />
+					<input type="hidden" name="itemId" th:value="${itemCardapio.id}" />
 					<label for="quantidade">Quantidade: </label>
 					<select name="quantidade" id="quantidade">
 						<option>1</option>
@@ -78,6 +81,9 @@
 						<option>3</option>
 						<option>4</option>
 					</select><br /><br />
+					Observações:
+					<br />
+					<textarea name="observacoes"></textarea><br /><br />
 					<input type="submit" value="Adicionar ao carrinho" />
 				</form>
 			</div>

@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import br.com.softblue.bluefood.domain.pedido.BandeiraCartao;
 import br.com.softblue.bluefood.domain.pedido.Pedido;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -50,4 +49,25 @@ public class Pagamento implements Serializable {
 	@NotNull
 	@Size(min = 4, max = 4)
 	private String numCartaoFinal;
+	
+	public void definirNumeroEBandeira(String numCartao) {
+		numCartaoFinal = numCartao.substring(12);
+		bandeira = getBandeira(numCartao);
+	}
+	
+	private BandeiraCartao getBandeira(String numCartao) {
+		if (numCartao.startsWith("0000")) {
+			return BandeiraCartao.AMEX;
+		}
+		
+		if (numCartao.startsWith("1111")) {
+			return BandeiraCartao.ELO;
+		}
+		
+		if (numCartao.startsWith("2222")) {
+			return BandeiraCartao.MASTER;
+		}
+		
+		return BandeiraCartao.VISA;
+	}
 }

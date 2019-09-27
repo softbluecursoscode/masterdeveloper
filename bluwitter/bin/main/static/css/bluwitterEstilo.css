@@ -1,0 +1,146 @@
+.divTopo
+{
+	background-color: #1da1f2;
+}
+ 
+body
+{
+	margin: 0px 0px 0px 0px;
+	text-align: center;
+}
+
+.imagemLogotipo
+{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	width: 50px;
+}
+
+.divCorpoPrincipal
+{
+	border: 10px solid #1da1f2;
+}
+
+.divPostagem
+{
+	height: auto;
+	min-height: 3vw;
+	margin-top: 20px;
+	border-bottom: 1px solid #C1C1C1;
+}
+
+.divPostagemImagemUsuario
+{
+	margin-left: 5%;
+	width: 10%;
+	
+	float: left;
+	overflow: hidden;
+}
+
+.divPostagemMensagem
+{
+	text-align: left;
+	width: 85%;
+	font-size:  3vw;
+	
+	
+	
+	overflow: hidden;
+}
+
+.spanAutor
+{
+	font-weight: bold;
+}
+
+.spanInfo
+{
+	color: #A0A0A0;
+}
+
+.pTextoPostagem
+{
+	margin-top: 0px;
+	margin-left: 5%;
+	margin-right: 5%;
+	font-family: sans-serif;
+}
+
+.spanCurtidas
+{
+	color: #1da1f2;
+}
+
+.imagemUsuario
+{
+	width: 100%;
+}
+
+.imagemIconeGostar
+{
+	margin-top: 10px;
+	width: 8%;
+}
+
+.buttonCriar
+{
+	margin: 20px 0px 20px 0px;
+	font-size: 3vw;
+	background-color: #1da1f2;
+	color: #ffffff;
+	font-family: sans-serif;
+	
+	border: 5px solid #1872A5;
+	font-weight: bold;
+	text-transform: uppercase;
+	border-radius: 5px;
+	padding: 5px 8px;
+}
+
+.buttonCancelar
+{
+	margin: 20px 0px 20px 0px;
+	font-size: 3vw;
+	background-color: #BABABA;
+	color: #ffffff;
+	font-family: sans-serif;
+	
+	border: 5px solid #848484;
+	font-weight: bold;
+	text-transform: uppercase;
+	border-radius: 5px;
+	padding: 5px 8px;
+}
+
+
+
+.divCriarPostagem
+{
+	width: 100%;
+	font-size:  3vw;
+}
+
+.textareaCriarMensagem
+{
+	margin-bottom: 20px;
+	width: 90%;
+	height: 10vw;
+	min-height: 100px;
+	border: 5px solid #1da1f2;
+	padding: 10px;
+	font-family: sans-serif;
+	font-size:  3vw;
+}
+
+.selectCriarMensagem
+{
+	margin-bottom: 20px;
+	width: 50%;
+	height: 5vw;
+	min-height: 100px;
+	border: 5px solid #1da1f2;
+	padding: 10px;
+	font-family: sans-serif;
+	font-size:  3vw;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurante/home}">
+
+<body>
+	<div layout:fragment="content">
+		<div>
+			<h1>Comidas</h1>
+		</div>
+		
+		<div id="divLarguraPadrao">
+			<div th:each="item : ${itensCardapio}">
+				<span id="restauranteOpcaoTitulo" th:text="${item.nome}"></span><br />
+				<span th:text="${item.categoria}"></span><br />
+				<span th:text="${item.descricao}"></span><br />
+				<span th:text="${#numbers.formatCurrency(item.preco)}"></span><br />
+				<input type="button" value="Remover" th:onclick="'location.href=\'' + @{/restaurante/comidas/remover} + '?itemId=' + ${item.id} + '\';'"><br /><br />
+			</div>			
+
+			<div id="mensagemDeErro">
+				Eventual mensagem de erro.
+			</div><br />
+			
+			<span id="restauranteOpcaoTitulo">Nova comida:</span><br />
+			<form>
+				<label for="item">Item: </label><br />	
+				<input type="text" name="item" id="item" /><br />
+				
+				<label for="descricao">Descrição: </label><br />	
+				<input type="text" name="descricao" id="descricao" /><br />
+				
+				<label for="preco">Preço: </label><br />	
+				<input type="text" name="preco" id="preco" /><br />
+				
+				<label for="destaque">Destaque: </label><br />	
+				<input type="checkbox" name="destaque" id="destaque" /><br />
+				
+				<label for="categoria">Categoria de comida: </label><br />	
+				<select name="categoria" id="categoria">
+					<option>Salada</option>
+					<option>Churrasco</option>
+					<option>Pizza</option>
+					<option>Hamburguer</option>
+				</select><br /><br />
+					
+				<input type="button" value="Adicionar" /><br /><br />
+			</form>
+		</div>
+
+		<input type="button" value="Voltar" onClick="location.href='restauranteHome.html';" />
+	</div>
+</body>
+</html>
+

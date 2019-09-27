@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/cliente/home}">
 <body>
 	<div layout:fragment="content">
 		<div>
 			<h1>SEU PEDIDO: <span th:text="${pedido.formattedId}"></span></h1>
-			<input type="button" value="Refazer pedido" onClick="location.href='clienteCarrinho.html';">
+			<input type="button" value="Refazer pedido" th:onclick="'location.href=\'' + @{/cliente/carrinho/refazerCarrinho} + '?pedidoId=' + ${pedido.id} + '\''">
 		</div>
 		
 		
@@ -14,7 +14,7 @@
 		</div><br />
 		
 		<div>
-			<img th:src="@{/cliente/img/} + ${pedido.restaurante.logotipo}" id="imgRestauranteBusca" />
+			<img th:src="@{/images/logotipo/} + ${pedido.restaurante.logotipo}" id="imgRestauranteBusca" />
 		</div>
 		<br /><br />
 

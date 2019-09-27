@@ -1,25 +1,19 @@
 package br.com.softblue.bluefood.infrastructure.web.controller;
 
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.softblue.bluefood.application.ValidationException;
 import br.com.softblue.bluefood.application.service.ClienteService;
@@ -34,7 +28,6 @@ import br.com.softblue.bluefood.domain.restaurante.ItemCardapioRepository;
 import br.com.softblue.bluefood.domain.restaurante.Restaurante;
 import br.com.softblue.bluefood.domain.restaurante.RestauranteRepository;
 import br.com.softblue.bluefood.domain.restaurante.SearchFilter;
-import br.com.softblue.bluefood.util.IOUtils;
 import br.com.softblue.bluefood.util.SecurityUtils;
 
 @Controller
@@ -62,12 +55,7 @@ public class ClienteController {
 	@Autowired
 	private ItemCardapioRepository itemCategoriaRepository;
 	
-	@Value("${bluefood.upload.logotipo}")
-	private String logotiposDir;	
 	
-	@Value("${bluefood.upload.comidas}")
-	private String comidasDir;	
-
 	@PostMapping(path = "/save")
 	public String save(@Valid Cliente cliente, Errors errors, Model model) throws ValidationException {
 		if (!errors.hasErrors()) {
@@ -78,11 +66,10 @@ public class ClienteController {
 				
 			} catch (ValidationException e) {
 				errors.rejectValue("email", null, "E-mail já existente");
-				defineEditMode(model);
 			}
 		}
 
-		defineEditMode(model);
+		ControllerHelper.setEditMode(model, true);
 		return "cliente-cadastro";
 	}
 	
@@ -104,12 +91,8 @@ public class ClienteController {
 	public String edit(Model model) {
 		Integer loggedUserId = SecurityUtils.loggedUser().getUsuario().getId();
 		model.addAttribute("cliente", clienteRepository.findById(loggedUserId).orElseThrow());
-		defineEditMode(model);
+		ControllerHelper.setEditMode(model, true);
 		return "cliente-cadastro";
-	}
-	
-	private void defineEditMode(Model model) {
-		model.addAttribute("editMode", true);
 	}
 	
 	@GetMapping(path = "/search")
@@ -127,34 +110,12 @@ public class ClienteController {
 		List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(new Sort(Direction.ASC, "nome"));
 		model.addAttribute("categorias", categorias);
 		
-		String cep = SecurityUtils.loggedClienteCep();
+		String cep = SecurityUtils.loggedCliente().getCep();
 		model.addAttribute("cep", cep);
 		
 		model.addAttribute("filter", filter);
 		
 		return "cliente-busca";
-	}
-
-	@GetMapping(path = "/img/{imgName}", produces = MediaType.IMAGE_PNG_VALUE)
-	@ResponseBody
-	public byte[] getLogotipoImageBytes(@PathVariable("imgName") String imgName)  {
-		try {
-			return IOUtils.getBytes(Paths.get(logotiposDir, imgName));
-		} catch (IOException e) {
-			// TODO: Trocar exceção
-			throw new RuntimeException(e);
-		}
-	}
-	
-	@GetMapping(path = "/img/comida/{imgName}", produces = MediaType.IMAGE_PNG_VALUE)
-	@ResponseBody
-	public byte[] getComidaImageBytes(@PathVariable("imgName") String imgName)  {
-		try {
-			return IOUtils.getBytes(Paths.get(comidasDir, imgName));
-		} catch (IOException e) {
-			// TODO: Trocar exceção
-			throw new RuntimeException(e);
-		}
 	}
 	
 	@GetMapping(path = "/restaurante")
@@ -183,6 +144,9 @@ public class ClienteController {
 		List<String> categorias = itemCategoriaRepository.findCategorias();
 		model.addAttribute("categorias", categorias);
 		
+		String cep = SecurityUtils.loggedCliente().getCep();
+		model.addAttribute("cep", cep);
+
 		return "cliente-restaurante";
 	}
 }

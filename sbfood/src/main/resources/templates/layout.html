@@ -11,12 +11,15 @@
 <body>
 	<header>
 		<div id="divLogotipoSistema">
-			<span id="spanAuxiliarDeAlinhamentoVertical"></span> <a th:href="@{/}">
+			<span id="spanAuxiliarDeAlinhamentoVertical"></span> <a th:href="${link} == null ? @{/} : ${link}">
 				<img th:src="@{/images/bf_logotipoSistema.png}" id="imgLogotipoSistema">
 			</a>
 		</div>
 		<div id="divUsuarioLogado" th:if="${#authentication.principal != 'anonymousUser'}">
 			<span th:text="'Olá, ' + ${#authentication.principal.usuario.nome} + '!'"></span>
+			<div style="display: inline;" th:if="${session.carrinho != null}">
+				<br><a th:href="@{/cliente/carrinho/visualizar}"><img th:src="@{/images/bf_iconeCarrinho.png}" id="imgIconeCarrinho"></a>
+			</div>
 		</div>
 	</header>
 	<br />

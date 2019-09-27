@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/cliente/home}">
 <body>
 	<div layout:fragment="content">
 		<form id="form" method="get" th:object="${filter}" th:action="@{/cliente/search}">
@@ -18,7 +18,7 @@
 				<input type="hidden" name="categoriaId" th:field="*{categoriaId}" />			
 				<div id="divCategoriasComidaOpcao" th:each="categoria: ${categorias}">
 					<a href="#" th:onclick="'searchRest(\'' + ${categoria.id} + '\');'">
-						<img th:src="@{/categoria/img/} + ${categoria.imagem}" id="imgCategoriaComida"><br />
+						<img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaComida"><br />
 						<span th:text="${categoria.nome}"></span>
 					</a>
 				</div>
