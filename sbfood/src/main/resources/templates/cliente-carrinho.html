@@ -10,7 +10,7 @@
 			
 		<div>
 			<h1>SEU PEDIDO</h1>
-			<img th:src="@{/images/logotipo/} + ${carrinho.restaurante.logotipo}" id="imgRestauranteBusca" /><br /><br />
+			<img th:if="${carrinho.restaurante != null}" th:src="@{/images/logotipo/} + ${carrinho.restaurante.logotipo}" id="imgRestauranteBusca" />
 		</div>
 		<br /><br />
 

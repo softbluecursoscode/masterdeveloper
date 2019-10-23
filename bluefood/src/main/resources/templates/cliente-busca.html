@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/cliente/home}">
+	
+	<body>
+		<div layout:fragment="content">
+			<form id="form" method="get" th:object="${searchFilter}" th:action="@{/cliente/search}">
+				<input id="searchType" type="hidden" th:field="*{searchType}" />
+				<input id="categoriaId" type="hidden" th:field="*{categoriaId}" />
+				
+				<div>
+					<h1>É hora de rangar!</h1>
+						<fieldset>
+							<input type="text" th:field="*{texto}" placeholder="Buscar por..." />
+							<input type="button" value="Procurar" onclick="searchRest(null);" />
+						</fieldset>
+					<br />
+				</div>
+				
+				<div id="divCategoriasComidaGeral">
+					<div id="divCategoriasComidaOpcao" th:each="categoria : ${categorias}">
+						<a href="#" th:onclick="'searchRest(' + ${categoria.id} + ');'">
+							<img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaComida" /><br />
+							<span th:text="${categoria.nome}"></span>
+						</a>
+					</div>
+				</div>
+			
+				<div>
+					<h1>Resultados</h1>
+					<fieldset id="fieldsetFiltros">
+						<legend>Filtros</legend>
+						<input type="button" value="Entrega grátis" th:id="*{entregaGratis} ? 'inputSelecionado' : ''" onclick="setCmd('EntregaGratis')" /><br />
+						<input type="button" value="Maior taxa" th:id="*{order.name()} == 'Taxa' and !*{asc} ? 'inputSelecionado' : ''" onclick="setCmd('MaiorTaxa')" />
+						<input type="button" value="Menor taxa" th:id="*{order.name()} == 'Taxa' and *{asc} ? 'inputSelecionado' : ''" onclick="setCmd('MenorTaxa')" /> <br/>
+						<input type="button" value="Maior tempo" th:id="*{order.name()} == 'Tempo' and !*{asc} ? 'inputSelecionado' : ''" onclick="setCmd('MaiorTempo')" />
+						<input type="button" value="Menor tempo" th:id="*{order.name()} == 'Tempo' and *{asc} ? 'inputSelecionado' : ''" id="inputSelecionado" onclick="setCmd('MenorTempo')" /> <br/>
+						
+						<input type="hidden" id="entregaGratis" th:field="*{entregaGratis}" />
+						<input type="hidden" id="order" th:field="*{order}" />
+						<input type="hidden" id="asc" th:field="*{asc}" />
+						<input type="hidden" id="cmd" name="cmd" />
+					</fieldset>
+					<br>
+				</div>
+			</form>
+	
+			
+			<div id="divRestaurantesGeral">
+				<div id="divRestaurantesOpcao" th:each="restaurante : ${restaurantes}">
+					<a th:href="@{/cliente/restaurante} + '?restauranteId=' + ${restaurante.id}">
+						<img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" id="imgRestauranteOpcao"><br />
+						<span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span><br />
+						<span th:text="${restaurante.categoriasAsText}"></span><br />
+						<span th:text="'Tempo médio de entrega: ' + ${restaurante.calcularTempoEntrega(cep)} + 'm'"></span><br />
+						<span th:text="'Taxa de entrega: ' + ${#numbers.formatCurrency(restaurante.taxaEntrega)}"></span><br />
+					</a>
+					<br /><br />
+				</div>
+			</div>
+			
+			<div th:if="${restaurantes.size() == 0}">
+				<span>Nenhum restaurante encontrado</span>
+				<br />
+			</div>
+			
+			<br />
+			<input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'" />
+		</div>
+	</body>
+</html>
+

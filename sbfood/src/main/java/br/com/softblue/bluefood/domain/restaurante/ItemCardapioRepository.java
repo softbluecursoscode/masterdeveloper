@@ -13,6 +13,6 @@ public interface ItemCardapioRepository extends JpaRepository<ItemCardapio, Inte
 	
 	public List<ItemCardapio> findByRestaurante_IdAndDestaqueAndCategoria(Integer restauranteId, boolean destaque, String categoria);
 	
-	@Query("SELECT DISTINCT ic.categoria FROM ItemCardapio ic ORDER BY ic.categoria")
-	public List<String> findCategorias();
+	@Query("SELECT DISTINCT ic.categoria FROM ItemCardapio ic WHERE ic.restaurante.id = ?1 ORDER BY ic.categoria")
+	public List<String> findCategorias(Integer restauranteId);
 }

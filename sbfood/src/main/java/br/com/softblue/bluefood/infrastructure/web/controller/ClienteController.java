@@ -141,7 +141,7 @@ public class ClienteController {
 		model.addAttribute("itensCardapioDestaque", itensCardapioDestaque);
 		model.addAttribute("itensCardapioNaoDestaque", itensCardapioNaoDestaque);
 		
-		List<String> categorias = itemCategoriaRepository.findCategorias();
+		List<String> categorias = itemCategoriaRepository.findCategorias(restauranteId);
 		model.addAttribute("categorias", categorias);
 		
 		String cep = SecurityUtils.loggedCliente().getCep();

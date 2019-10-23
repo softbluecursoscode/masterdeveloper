@@ -45,8 +45,14 @@ public class ClienteService {
 		
 		Cliente cliente = clienteRepository.findByEmail(email);
 		
-		if (cliente != null && id != null && cliente.getId() != id) {
-			return false;
+		if (cliente != null) {
+			if (id == null) {
+				return false;
+			}
+			
+			if (!cliente.getId().equals(id)) {
+				return false;
+			}
 		}
 		
 		return true;

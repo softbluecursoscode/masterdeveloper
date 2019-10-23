@@ -9,6 +9,10 @@ group = 'br.com.softblue.sbfood'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '12'
 
+compileJava.options.encoding = 'Cp1252'
+compileTestJava.options.encoding = 'Cp1252'
+javadoc.options.encoding = 'Cp1252'
+
 configurations {
 	developmentOnly
 	runtimeClasspath {

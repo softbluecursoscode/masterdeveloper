@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurante/home}">
+	
+	<body>
+		<div layout:fragment="content">
+		<div>
+			<h1>Relatório de Itens</h1>
+			<form method="get" th:action="@{/restaurante/relatorio/itens}" th:object="${relatorioItemFilter}">
+				<fieldset id="fieldsetFiltros">
+					<legend>Filtros</legend>
+					<label for="numero">Item: </label><br />	
+					<select  id="numero" th:field="*{itemId}">
+						<option value="0">Todos</option>
+						<option th:each="item : ${itensCardapio}" th:value="${item.id}" th:text="${item.nome}" />
+					</select>
+					<br />
+					
+					<label for="inicio">Início: </label><br />	
+					<input type="date" id="inicio" th:field="*{dataInicial}" /><br />
+					
+					<label for="fim">Fim: </label><br />	
+					<input type="date" id="fim" th:field="*{dataFinal}" /><br />
+					
+					<input type="submit" value="Buscar" />
+				</fieldset>
+			</form>
+		</div>
+		<br /><br />
+		
+		<table th:if="${itensCalculados.size() > 0}">
+			<tr>
+				<th>Item</th>
+				<th>Quantidade</th>
+				<th>Faturamento</th>
+			</tr>
+			<tr th:each="item : ${itensCalculados}">
+				<td><span th:text="${item.nome}"></span></td>
+				<td><span th:text="${item.quantidade}"></span></td>
+				<td><span th:text="${#numbers.formatCurrency(item.valor)}"></span></td>
+			</tr>
+		</table>
+		
+		<span th:if="${itensCalculados.size() == 0}">Nenhum item encontrado</span>
+		
+		<br /><br />
+
+		<input type="submit" value="Voltar" th:onclick="'location.href=\'' + @{/restaurante/home} + '\''" />
+
+		<br /><br />
+	</body>
+</html>
+

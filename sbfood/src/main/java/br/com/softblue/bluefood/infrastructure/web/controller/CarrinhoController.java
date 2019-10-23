@@ -14,6 +14,7 @@ import br.com.softblue.bluefood.domain.pedido.Carrinho;
 import br.com.softblue.bluefood.domain.pedido.ItemPedido;
 import br.com.softblue.bluefood.domain.pedido.Pedido;
 import br.com.softblue.bluefood.domain.pedido.PedidoRepository;
+import br.com.softblue.bluefood.domain.pedido.RestauranteDiferenteException;
 import br.com.softblue.bluefood.domain.restaurante.ItemCardapio;
 import br.com.softblue.bluefood.domain.restaurante.ItemCardapioRepository;
 
@@ -48,7 +49,13 @@ public class CarrinhoController {
 			Model model) {
 		
 		ItemCardapio itemCardapio = itemCardapioRepository.findById(itemCardapioId).orElseThrow();
-		carrinho.adicionarItem(itemCardapio, quantidade, observacoes);
+		
+		try {
+			carrinho.adicionarItem(itemCardapio, quantidade, observacoes);
+			
+		} catch (RestauranteDiferenteException e) {
+			model.addAttribute("msg", "Não é possível misturar comidas de restaurantes diferentes");
+		}
 
 		return "cliente-carrinho";
 	}

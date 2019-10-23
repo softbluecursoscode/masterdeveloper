@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}" th:with="link=@{/restaurante/home}">
+	
+	<body>
+		<div layout:fragment="content">
+			<div>
+				<h1>Configurações</h1>
+				<input type="button" value="Dados básicos" th:onclick="'location.href=\'' + @{/restaurante/edit} + '\';'" /><br />
+				<input type="button" value="Comidas" th:onclick="'location.href=\'' + @{/restaurante/comidas} + '\';'" /><br />
+				<input type="button" value="Relatório de Pedidos" th:onclick="'location.href=\'' + @{/restaurante/relatorio/pedidos} + '\';'" /><br />
+				<input type="button" value="Relatório de Itens" th:onclick="'location.href=\'' + @{/restaurante/relatorio/itens} + '\';'" /><br />
+				<input type="button" value="Sair" th:onclick="'location.href=\'' + @{/logout} + '\';'" /><br />
+			</div>
+			
+			<div>
+				<h1>Pedidos em andamento</h1>
+				<div th:each="pedido : ${pedidos}">
+					<input type="button" th:value="${pedido.formattedId}" 
+						th:onclick="'location.href=\'' + @{/restaurante/pedido} + '?pedidoId=' + ${pedido.id} + '\';'" /><br />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

@@ -26,7 +26,6 @@ import br.com.softblue.bluefood.domain.restaurante.CategoriaRestauranteRepositor
 import br.com.softblue.bluefood.domain.restaurante.ItemCardapio;
 import br.com.softblue.bluefood.domain.restaurante.ItemCardapioRepository;
 import br.com.softblue.bluefood.domain.restaurante.Restaurante;
-import br.com.softblue.bluefood.domain.restaurante.RestauranteRepository;
 import br.com.softblue.bluefood.util.SecurityUtils;
 
 @Controller
@@ -41,9 +40,6 @@ public class RestauranteController {
 	
 	@Autowired
 	private RelatorioService relatorioService;
-	
-	@Autowired
-	private RestauranteRepository restauranteRepository;
 	
 	@Autowired
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
@@ -64,8 +60,7 @@ public class RestauranteController {
 	@GetMapping(path = "/edit")
 	public String edit(Model model) {
 		Restaurante restaurante = SecurityUtils.loggedRestaurante();
-		
-		model.addAttribute("restaurante", restauranteRepository.findById(restaurante.getId()).orElseThrow());
+		model.addAttribute("restaurante", restaurante);
 		ControllerHelper.setEditMode(model, true);
 		
 		ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
@@ -116,6 +111,8 @@ public class RestauranteController {
 		List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(restaurante.getId());
 		
 		model.addAttribute("itensCardapio", itensCardapio);
+		model.addAttribute("itemCardapio", new ItemCardapio());
+		model.addAttribute("restaurante", restaurante);
 		
 		return "restaurante-comidas";
 	}
@@ -123,6 +120,26 @@ public class RestauranteController {
 	@GetMapping(path = "/comidas/remover")
 	public String removerComida(@RequestParam("itemId") Integer itemId, Model model) {
 		itemCardapioRepository.deleteById(itemId);
+		return "redirect:/restaurante/comidas";
+	}
+	
+	@PostMapping(path = "/comidas/cadastrar")
+	public String removerComida(
+			@Valid ItemCardapio itemCardapio,
+			Errors errors,
+			Model model) {
+		
+		if (errors.hasErrors()) {
+			Restaurante restaurante = SecurityUtils.loggedRestaurante();
+			List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(restaurante.getId());
+			
+			model.addAttribute("itensCardapio", itensCardapio);
+			model.addAttribute("restaurante", restaurante);
+
+			return "restaurante-comidas";
+		}
+		
+		restauranteService.saveItemCardapio(itemCardapio);
 		return "redirect:/restaurante/comidas";
 	}
 	

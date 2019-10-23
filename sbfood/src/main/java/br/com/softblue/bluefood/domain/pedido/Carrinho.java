@@ -18,10 +18,14 @@ public class Carrinho implements Serializable {
 	
 	private Restaurante restaurante;
 	
-	public void adicionarItem(ItemCardapio itemCardapio, Integer quantidade, String observacoes) {
+	public void adicionarItem(ItemCardapio itemCardapio, Integer quantidade, String observacoes) throws RestauranteDiferenteException {
 		if (itens.isEmpty()) {
 			restaurante = itemCardapio.getRestaurante();
+		
+		} else if (!itemCardapio.getRestaurante().getId().equals(restaurante.getId())) {
+			throw new RestauranteDiferenteException();
 		}
+		
 		
 		if (!exists(itemCardapio)) {
 			ItemPedido itemPedido = new ItemPedido();
@@ -34,7 +38,11 @@ public class Carrinho implements Serializable {
 	}
 	
 	public void adicionarItem(ItemPedido itemPedido) {
-		adicionarItem(itemPedido.getItemCardapio(), itemPedido.getQuantidade(), itemPedido.getObservacoes());
+		try {
+			adicionarItem(itemPedido.getItemCardapio(), itemPedido.getQuantidade(), itemPedido.getObservacoes());
+		
+		} catch (RestauranteDiferenteException e) {
+		}
 	}
 	
 	public void removerItem(ItemCardapio itemCardapio) {
@@ -44,6 +52,10 @@ public class Carrinho implements Serializable {
 				iterator.remove();
 				break;
 			}
+		}
+		
+		if (itens.size() == 0) {
+			restaurante = null;
 		}
 	}
 	
