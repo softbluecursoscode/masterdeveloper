@@ -1,0 +1,115 @@
+<!--
+ *******************************************************************************
+ * MIT License
+ *
+ * Copyright (c) 2019 Softblue
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *******************************************************************************
+ -->
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>BlueFood</title>
+		<meta charset="ISO-8859-1">
+		<link rel="stylesheet" type="text/css" href="css/bf_estiloSistema.css">
+	</head>
+	<body>
+		<header>
+			<div id="divLogotipoSistema">
+				<span id="spanAuxiliarDeAlinhamentoVertical"></span>
+				<a href="/">
+					<img src="images/bf_logotipoSistema.png" id="imgLogotipoSistema">
+				</a>
+			</div>
+			<div id="divUsuarioLogado">
+				Olá Nome do Usuário!
+			</div>
+		</header>
+		<br><br>
+		<!-- Cabeçalho - Fim -->
+		
+		<div>
+			<h1>Relatório de Pedidos</h1>
+			<fieldset id="fieldsetFiltros">
+				<legend>Filtros</legend>
+				<label for="numero">Número: </label><br>	
+				<input type="text" name="numero" id="numero"><br>
+				<label for="inicio">Início: </label><br>	
+				<input type="date" name="inicio" id="inicio"><br>
+				<label for="fim">Fim: </label><br>	
+				<input type="date" name="fim" id="fim"><br>
+				<input type="button" value="Buscar">
+			</fieldset>
+		</div>
+		<br><br>
+		
+		<table>
+			<tr>
+				<th>Pedido</th>
+				<th>Nome</th>
+				<th>Endereço</th>
+				<th>Valor</th>
+			</tr>
+			<tr>
+				<td><input type="submit" value="#35334" onClick="location.href='restaurantePedido.html';"></td>
+				<td>Samuel</td>
+				<td>Rua das Flores 75</td>
+				<td>R$ 65,00</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="#3452" onClick="location.href='restaurantePedido.html';"></td>
+				<td>Henrique</td>
+				<td>Avenida dos Estados 51</td>
+				<td>R$ 95,00</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="#6543" onClick="location.href='restaurantePedido.html';"></td>
+				<td>Pedro</td>
+				<td>Rua Marambá 775</td>
+				<td>R$ 32,00</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="#35334" onClick="location.href='restaurantePedido.html';"></td>
+				<td>Ivo</td>
+				<td>Rua XV de Novembro 11</td>
+				<td>R$ 65,00</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="#3452" onClick="location.href='restaurantePedido.html';"></td>
+				<td>Bruno</td>
+				<td>Avenida Atlântica 889</td>
+				<td>R$ 95,00</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="#6543" onClick="location.href='restaurantePedido.html';"></td>
+				<td>Evandro</td>
+				<td>Rua José Antônio 5655</td>
+				<td>R$ 32,00</td>
+			</tr>
+		</table>
+		<br><br>
+
+		<input type="button" value="Voltar" onClick="location.href='restauranteHome.html';">
+
+		<!-- Rodapé - Início -->
+		<br><br>
+	</body>
+</html>
+
