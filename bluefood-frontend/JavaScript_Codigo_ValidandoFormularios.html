@@ -1,0 +1,123 @@
+<!--
+ *******************************************************************************
+ * MIT License
+ *
+ * Copyright (c) 2019 Softblue
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *******************************************************************************
+ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Formulários</title>
+  </head>
+  <body>
+    
+    <script>
+      function validarFormulario()
+      {
+        var validacao = true;
+        
+        var conteudo_nome = document.forms["meu_form"].campo_nome.value;
+        
+        if(conteudo_nome == "")
+        {
+          alert("É necessário preencher o campo nome corretamente.");
+          validacao = false;
+          return;
+        }
+        
+        var total_opcoes = document.forms["meu_form"].campo_sexo.length;
+        
+        var opcao_escolhida = null;
+        
+        for(var i=0; i<total_opcoes; i++)
+        {
+          if(document.forms["meu_form"].campo_sexo[i].checked == true)
+          {
+            opcao_escolhida = document.forms["meu_form"].campo_sexo[i].value;
+          }
+        }
+        
+        if(opcao_escolhida == null)
+        {
+          alert("É necessário selecionar o campo sexo corretamente.");
+          validacao = false;
+          return;
+        }
+        
+        var conteudo_maior = document.forms["meu_form"].campo_maior.checked;
+        
+        if(conteudo_maior != true)
+        {
+          alert("Este site é restrito para maiores de idade.");
+          validacao = false;
+          return;
+        }
+        
+        conteudo_comoNumero = document.forms["meu_form"].campo_como.selectedIndex;
+        
+        if(conteudo_comoNumero == 0)
+        {
+          alert("É necessário selecionar como conheceu o site.");
+          validacao = false;
+          return;
+        }
+
+        if(validacao == true)
+        {
+          alert("Dados válidos!");
+          document.forms["meu_form"].submit();
+        }
+        
+      }
+    </script>
+    <form method="post" action="#" name="meu_form">
+      
+      Nome completo:
+      <input type="text" name="campo_nome"/>
+      <br/>
+      
+      Sexo:
+      <input type="radio" name="campo_sexo" value="M"/> Masculino
+      <input type="radio" name="campo_sexo" value="F"/> Feminino
+      <br/>
+      
+      <input type="checkbox" name="campo_maior" value="maior" checked/>
+      Declaro ser maior de 18 anos
+      <br/>
+      
+      Como conheceu o site?
+      <select name="campo_como">
+        <option value="Nenhum">Selecione...</option>
+        <option value="Ind">Indicação de amigo</option>
+        <option value="Out">Outro site</option>
+        <option value="Goo">Google</option>
+      </select>
+      <br/>
+      
+      <input type="reset" value="Limpar dados"/>
+      <input type="button" value="Enviar" onClick="validarFormulario();"/>
+      
+    </form>
+    
+  </body>
+</html>

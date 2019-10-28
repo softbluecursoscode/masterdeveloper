@@ -1,0 +1,132 @@
+<!--
+ *******************************************************************************
+ * MIT License
+ *
+ * Copyright (c) 2019 Softblue
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *******************************************************************************
+ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JavaScript</title>
+  </head>
+  <body>
+    <script>
+      var x = 4;
+      var y = 5;
+      var total = x + y;
+      document.write("O resultado da soma de " + x + " com " + y + " é " + total);
+      
+      function somar(a, b)
+      {
+        return a + b;
+      }
+      document.write("<br>O resultado da soma de " + x + " com " + y + " pela função somar é " + somar(x, y));
+      
+      document.write("<br>Laço de repetição FOR: ");
+      for(var i = 0; i < 10; i++)
+      {
+        document.write(i + " ");
+      }
+      
+      document.write("<br>Laço de repetição WHILE: ");
+      i = 0;
+      while(i < 10)
+      {
+        document.write(i + " ");
+        i++;
+      }
+    </script>
+    
+    <script>
+      function trocarTexto()
+      {
+        document.getElementById("meuParagrafo").innerHTML = "Novo texto =D";
+      }
+    </script>
+    <p id="meuParagrafo">Este é o texto original.</p>
+    <input type="button" value="Trocar texto do parágrafo" onClick="trocarTexto();"/>
+    
+    <script>
+      function somarCampos()
+      {
+        var campoX = document.getElementById("campoX").value;
+        var campoY = document.getElementById("campoY").value;
+        
+        campoX = parseInt(campoX);
+        campoY = parseInt(campoY);
+        var campoResultado = somar(campoX, campoY);
+        
+        document.getElementById("campoResultado").value = campoResultado;
+      }
+    </script>
+    <form>
+      <input type="text" id="campoX"/> + 
+      <input type="text" id="campoY"/> = 
+      <input type="text" id="campoResultado"/>
+      <input type="button" value="Somar campos" onClick="somarCampos();"/>
+    </form>
+    
+    <script>
+      function trocarTextoPassarCursor()
+      {
+        document.getElementById("meuSegundoParagrafo").innerHTML = "Novo texto =D";
+      }
+      
+      function voltarTextoPassarCursor()
+      {
+        document.getElementById("meuSegundoParagrafo").innerHTML = "Este é o texto original.";
+      }
+    </script>
+    <p id="meuSegundoParagrafo" onMouseOver="trocarTextoPassarCursor();" onMouseOut="voltarTextoPassarCursor();">Este é o texto original.</p>
+    
+    <input type="button" value="Comando ALERT" onClick="alert('Oi!');"/>
+    
+    <script>
+      function comandoConfirm()
+      {
+        var decisao = confirm("Deseja mesmo executar tal operação?");
+        
+        if(decisao)
+        {
+          alert('Operação vai ser realizada!');
+        }
+        else
+        {
+          alert('Operação abortada.');
+        }
+      }
+    </script>
+    <input type="button" value="Comando CONFIRM" onClick="comandoConfirm();"/>
+    
+    <script>
+      function comandoPrompt()
+      {
+        var nome = prompt("Digite o seu nome: ");
+        
+        alert("Olá " + nome);
+      }
+    </script>
+    <input type="button" value="Comando PROMPT" onClick="comandoPrompt();"/>
+
+  </body>
+</html>

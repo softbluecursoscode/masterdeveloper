@@ -1,0 +1,157 @@
+<!--
+ *******************************************************************************
+ * MIT License
+ *
+ * Copyright (c) 2019 Softblue
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *******************************************************************************
+ -->
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>BlueFood</title>
+		<meta charset="ISO-8859-1">
+		<link rel="stylesheet" type="text/css" href="css/bf_estiloSistema.css">
+	</head>
+	<body>
+		<header>
+			<div id="divLogotipoSistema">
+				<span id="spanAuxiliarDeAlinhamentoVertical"></span>
+				<a href="/">
+					<img src="images/bf_logotipoSistema.png" id="imgLogotipoSistema">
+				</a>
+			</div>
+		</header>
+		<br><br>
+		<!-- Cabeçalho - Fim -->
+		
+		<div>
+			<img src="images/sys_restauranteSbubby.png" id="imgRestauranteBusca"><br><br>
+			<span id="restauranteOpcaoTitulo">Nome do Restaurante</span><br>
+			<span id="restauranteOpcaoCategoria">Categoria de Comida</span><br>
+			<span id="restauranteOpcaoTempo">Tempo médio de entrega: 40m</span><br>
+			<span id="restauranteOpcaoTaxa">Taxa de entrega: R$ 15,00</span><br>
+		</div>
+
+		<div>
+			<h1>Opções</h1>
+			<fieldset id="fieldsetFiltros">
+				<legend>Filtros</legend>
+				<input type="button" value="Promoções" id="inputSelecionado">
+				<input type="button" value="Saladas"> 
+				<input type="button" value="Bebidas"> 
+				<input type="button" value="Pizzas"> 
+				<input type="button" value="Saladas"> 
+				<input type="button" value="Bebidas"> 
+				<input type="button" value="Pizzas"> 
+			</fieldset>
+			<br>
+		</div>
+		
+		<div>
+			<h1>Destaques</h1>
+		</div>
+		
+		<div id="divCategoriasComidaGeral">
+			<div id="divRestaurantesOpcao">
+				<img src="images/sys_comidaPizzaCalabresa.png" id="imgRestauranteOpcao"><br>
+				<span id="restauranteOpcaoTitulo">Pizza de Calabresa</span><br>
+				<span>Massa fina, queijo, calabresa e pimenta.</span><br>
+				<span>R$ 45,00</span><br><br>
+				<form action="#">
+					<label for="quantidade">Quantidade: </label>
+					<br>
+					<select name="quantidade" id="quantidade">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select><br><br>
+					Observações:
+					<br>
+					<textarea></textarea>
+					<br><br>
+					<input type="button" value="Adicionar ao carrinho" onClick="location.href='clienteCarrinho.html';">
+				</form>
+			</div>
+		</div>
+		<br><br>
+
+		<div>
+			<h1>Menu</h1>
+		</div>
+		
+		<div id="divCategoriasComidaGeral">
+			<div id="divRestaurantesOpcao">
+				<img src="images/sys_comidaPizzaCalabresa.png" id="imgRestauranteOpcao"><br>
+				<span id="restauranteOpcaoTitulo">Pizza de Calabresa</span><br>
+				<span>Massa fina, queijo, calabresa e pimenta.</span><br>
+				<span>R$ 45,00</span><br><br>
+				<form action="#">
+					<label for="quantidade">Quantidade: </label>
+					<br>
+					<select name="quantidade" id="quantidade">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select><br><br>
+					Observações:
+					<br>
+					<textarea></textarea>
+					<br><br>
+					<input type="button" value="Adicionar ao carrinho" onClick="location.href='clienteCarrinho.html';">
+				</form>
+			</div>
+		</div>
+		<br><br>
+		
+		<div id="divCategoriasComidaGeral">
+			<div id="divRestaurantesOpcao">
+				<img src="images/sys_comidaHamburguer.png" id="imgRestauranteOpcao"><br>
+				<span id="restauranteOpcaoTitulo">Hamburguer</span><br>
+				<span>Pão, hamburguer 200gr, queijo, tomate, alface e bacon.</span><br>
+				<span>R$ 30,00</span><br><br>
+				<form action="#">
+					<label for="quantidade">Quantidade: </label>
+					<br>
+					<select name="quantidade" id="quantidade">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+					</select><br><br>
+					Observações:
+					<br>
+					<textarea></textarea>
+					<br><br>
+					<input type="button" value="Adicionar ao carrinho" onClick="location.href='clienteCarrinho.html';">
+				</form>
+			</div>
+		</div>
+		<br><br>
+
+		<input type="button" value="Voltar" onClick="location.href='clienteBusca.html';">
+
+		<!-- Rodapé - Início -->
+		<br><br>
+	</body>
+</html>
+

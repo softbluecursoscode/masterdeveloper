@@ -1,0 +1,122 @@
+<!--
+ *******************************************************************************
+ * MIT License
+ *
+ * Copyright (c) 2019 Softblue
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *******************************************************************************
+ -->
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>BlueFood</title>
+		<meta charset="ISO-8859-1">
+		<link rel="stylesheet" type="text/css" href="css/bf_estiloSistema.css">
+	</head>
+	<body>
+		<header>
+			<div id="divLogotipoSistema">
+				<span id="spanAuxiliarDeAlinhamentoVertical"></span>
+				<a href="/">
+					<img src="images/bf_logotipoSistema.png" id="imgLogotipoSistema">
+				</a>
+			</div>
+			<div id="divUsuarioLogado">
+				Olá Nome do Usuário!
+				<br><img src="images/bf_iconeCarrinho.png" id="imgIconeCarrinho">
+			</div>
+		</header>
+		<br><br>
+		<!-- Cabeçalho - Fim -->
+		
+		<div>
+			<h1>É hora de rangar!</h1>
+			<form method="post" action="clienteBusca.html">
+				<fieldset>
+					<input type="text" name="email" placeholder="Buscar por...">
+					<input type="submit" value="Procurar">
+				</fieldset>
+			</form>
+			<br>
+		</div>
+		
+		<div id="divCategoriasComidaGeral">
+			<div id="divCategoriasComidaOpcao">
+				<a href="#">
+				<img src="images/sys_categoriaChurrasco.png" id="imgCategoriaComida"><br>
+				<span>Churrasco</span>
+				</a>
+			</div>
+			
+			<div id="divCategoriasComidaOpcao">
+				<a href="#">
+				<img src="images/sys_categoriaHamburguer.png" id="imgCategoriaComida"><br>
+				<span>Hamburguer</span>
+				</a>
+			</div>
+			
+			<div id="divCategoriasComidaOpcao">
+				<a href="#">
+				<img src="images/sys_categoriaPizza.png" id="imgCategoriaComida"><br>
+				<span>Pizza</span>
+				</a>
+			</div>
+			
+			<div id="divCategoriasComidaOpcao">
+				<a href="#">
+				<img src="images/sys_categoriaSalada.png" id="imgCategoriaComida"><br>
+				<span>Salada</span>
+				</a>
+			</div>
+			
+			<div id="divCategoriasComidaOpcao">
+				<a href="#">
+				<img src="images/sys_categoriaSobremesa.png" id="imgCategoriaComida"><br>
+				<span>Sobremesa</span>
+				</a>
+			</div>
+		</div>
+
+
+
+		<div>
+			<h1>Cupons disponíveis</h1>
+			<input type="button" value="10% Hamburguer" onClick="location.href='clienteBusca.html';"><br>
+			<input type="button" value="15% Pizza" onClick="location.href='clienteBusca.html';"><br>
+		</div>
+		
+		<div>
+			<h1>Últimos pedidos</h1>
+			<input type="button" value="#15124 McBlunalds" onClick="location.href='clientePedido.html';"><br>
+			<input type="button" value="#35464 Blue Pizza" onClick="location.href='clientePedido.html';"><br>
+			<input type="button" value="#38754 Hard Blue" onClick="location.href='clientePedido.html';"><br>
+		</div>
+		
+		<div>
+			<h1>Conta</h1>
+			<input type="button" value="Meus dados" onClick="location.href='clienteCadastro.html';">
+			<input type="button" value="Sair" onClick="location.href='index.html';">
+		</div>
+
+		<!-- Rodapé - Início -->
+		<br><br>
+	</body>
+</html>
+
