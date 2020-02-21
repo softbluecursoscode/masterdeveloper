@@ -42,7 +42,7 @@ import br.com.softblue.bluefood.util.FileType;
 @Constraint(validatedBy = UploadValidator.class)
 public @interface UploadConstraint {
 
-	String message() default "Arquivo inv·lido";
+	String message() default "Arquivo inv√°lido";
 	FileType[] acceptedTypes();
 	
 	Class<?>[] groups() default {};

@@ -27,6 +27,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -84,10 +85,10 @@ public class InsertDataForTesting {
 	private Restaurante[] restaurantes() {
 		List<Restaurante> restaurantes = new ArrayList<>(); 
 		
-		CategoriaRestaurante categoriaPizza = categoriaRestauranteRepository.findById(1).orElseThrow();
-		CategoriaRestaurante categoriaSanduiche = categoriaRestauranteRepository.findById(2).orElseThrow();
-		CategoriaRestaurante categoriaSobremesa = categoriaRestauranteRepository.findById(5).orElseThrow();
-		CategoriaRestaurante categoriaJapones = categoriaRestauranteRepository.findById(6).orElseThrow();
+		CategoriaRestaurante categoriaPizza = categoriaRestauranteRepository.findById(1).orElseThrow(NoSuchElementException::new);
+		CategoriaRestaurante categoriaSanduiche = categoriaRestauranteRepository.findById(2).orElseThrow(NoSuchElementException::new);
+		CategoriaRestaurante categoriaSobremesa = categoriaRestauranteRepository.findById(5).orElseThrow(NoSuchElementException::new);
+		CategoriaRestaurante categoriaJapones = categoriaRestauranteRepository.findById(6).orElseThrow(NoSuchElementException::new);
 		
 		Restaurante r = new Restaurante();
 		r.setNome("Bubger King");
@@ -167,7 +168,7 @@ public class InsertDataForTesting {
 		List<Cliente> clientes = new ArrayList<>(); 
 		
 		Cliente c = new Cliente();
-		c.setNome("Jo„o Silva");
+		c.setNome("Jo√£o Silva");
 		c.setEmail("joao@bluefood.com.br");
 		c.setSenha(StringUtils.encrypt("c"));
 		c.setCep("89300100");
@@ -192,8 +193,8 @@ public class InsertDataForTesting {
 	
 	private void itensCardapio(Restaurante[] restaurantes) {
 		ItemCardapio ic = new ItemCardapio();
-		ic.setCategoria("SanduÌche");
-		ic.setDescricao("Delicioso sanduÌche com molho");
+		ic.setCategoria("Sandu√≠che");
+		ic.setDescricao("Delicioso sandu√≠che com molho");
 		ic.setNome("Double Cheese Burger Special");
 		ic.setPreco(BigDecimal.valueOf(23.8));
 		ic.setRestaurante(restaurantes[0]);
@@ -202,8 +203,8 @@ public class InsertDataForTesting {
 		itemCardapioRepository.save(ic);
 		
 		ic = new ItemCardapio();
-		ic.setCategoria("SanduÌche");
-		ic.setDescricao("SanduÌche padr„o que mata a fome");
+		ic.setCategoria("Sandu√≠che");
+		ic.setDescricao("Sandu√≠che padr√£o que mata a fome");
 		ic.setNome("Cheese Burger Simples");
 		ic.setPreco(BigDecimal.valueOf(17.8));
 		ic.setRestaurante(restaurantes[0]);
@@ -212,9 +213,9 @@ public class InsertDataForTesting {
 		itemCardapioRepository.save(ic);
 		
 		ic = new ItemCardapio();
-		ic.setCategoria("SanduÌche");
-		ic.setDescricao("SanduÌche natural com peito de peru");
-		ic.setNome("SanduÌche Natural da Casa");
+		ic.setCategoria("Sandu√≠che");
+		ic.setDescricao("Sandu√≠che natural com peito de peru");
+		ic.setNome("Sandu√≠che Natural da Casa");
 		ic.setPreco(BigDecimal.valueOf(11.8));
 		ic.setRestaurante(restaurantes[0]);
 		ic.setDestaque(false);
@@ -223,7 +224,7 @@ public class InsertDataForTesting {
 		
 		ic = new ItemCardapio();
 		ic.setCategoria("Bebida");
-		ic.setDescricao("Refrigerante com g·s");
+		ic.setDescricao("Refrigerante com g√°s");
 		ic.setNome("Refrigerante Tradicional");
 		ic.setPreco(BigDecimal.valueOf(9));
 		ic.setRestaurante(restaurantes[0]);

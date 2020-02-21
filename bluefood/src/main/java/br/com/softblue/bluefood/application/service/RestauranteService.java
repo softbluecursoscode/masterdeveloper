@@ -25,6 +25,7 @@ package br.com.softblue.bluefood.application.service;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,11 +60,11 @@ public class RestauranteService {
 	@Transactional
 	public void saveRestaurante(Restaurante restaurante) throws ValidationException {
 		if (!validateEmail(restaurante.getEmail(), restaurante.getId())) {
-			throw new ValidationException("O e-mail est· duplicado");
+			throw new ValidationException("O e-mail est√° duplicado");
 		}
 		
 		if (restaurante.getId() != null) {
-			Restaurante restauranteDB = restauranteRepository.findById(restaurante.getId()).orElseThrow();
+			Restaurante restauranteDB = restauranteRepository.findById(restaurante.getId()).orElseThrow(NoSuchElementException::new);
 			restaurante.setSenha(restauranteDB.getSenha());
 			restaurante.setLogotipo(restauranteDB.getLogotipo());
 			restauranteRepository.save(restaurante);
@@ -108,7 +109,7 @@ public class RestauranteService {
 			restaurantes = restauranteRepository.findByCategorias_Id(filter.getCategoriaId());
 		
 		} else {
-			throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " n„o È suportado");
+			throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " n√£o √© suportado");
 		}
 		
 		Iterator<Restaurante> it = restaurantes.iterator();

@@ -21,20 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *******************************************************************************/
-package br.com.softblue.bluefood.domain.pagamento;
+package br.com.softblue.bluefood.util;
 
-import javax.validation.constraints.Pattern;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class DadosCartao {
+public class CollectionUtils {
 
-	@Pattern(regexp = "\\d{16}", message = "O número do cartão é inválido")
-	private String numCartao;
-	
-	public String getNumCartao() {
-		return numCartao;
-	}
-	
-	public void setNumCartao(String numCartao) {
-		this.numCartao = numCartao;
+	@SuppressWarnings("unchecked")
+	public static <T> List<T> listOf(T... objs) {
+		if (objs == null) {
+			return Collections.emptyList();
+		}
+		
+		//List<T> list = new ArrayList<>(objs.length);
+		//for (T obj : objs) {
+		//	list.add(obj);
+		//}
+		//return list;
+		
+		return Arrays.stream(objs).collect(Collectors.toList());
 	}
 }

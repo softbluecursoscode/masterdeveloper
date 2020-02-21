@@ -52,24 +52,24 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank(message = "O nome n„o pode ser vazio")
-	@Size(max = 80, message = "O nome È muito grande")
+	@NotBlank(message = "O nome n√£o pode ser vazio")
+	@Size(max = 80, message = "O nome √© muito grande")
 	@Column(nullable = false)
 	private String nome;
 	
-	@NotBlank(message = "O e-mail n„o pode ser vazio")
-	@Size(max = 60, message = "O e-mail È muito grande")
-	@Email(message = "O e-mail È inv·lido")
+	@NotBlank(message = "O e-mail n√£o pode ser vazio")
+	@Size(max = 60, message = "O e-mail √© muito grande")
+	@Email(message = "O e-mail √© inv√°lido")
 	@Column(nullable = false)
 	private String email;
 	
-	@NotBlank(message = "A senha n„o pode ser vazia")
-	@Size(max = 80, message = "A senha È muito grande")
+	@NotBlank(message = "A senha n√£o pode ser vazia")
+	@Size(max = 80, message = "A senha √© muito grande")
 	@Column(nullable = false)
 	private String senha;
 	
-	@NotBlank(message = "O telefone n„o pode ser vazio")
-	@Pattern(regexp = "[0-9]{10,11}", message = "O telefone possui formato inv·lido")
+	@NotBlank(message = "O telefone n√£o pode ser vazio")
+	@Pattern(regexp = "[0-9]{10,11}", message = "O telefone possui formato inv√°lido")
 	@Column(length = 11, nullable = false)
 	private String telefone;
 	

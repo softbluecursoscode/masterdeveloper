@@ -57,9 +57,9 @@ import lombok.Setter;
 public class Pedido implements Serializable {
 	
 	public enum Status {
-		Producao(1, "Em produção", false),
+		Producao(1, "Em produÃ§Ã£o", false),
 		Entrega(2, "Saiu para entrega", false),
-		Concluido(3, "Concluído", true);
+		Concluido(3, "ConcluÃ­do", true);
 		
 		Status(int ordem, String descricao, boolean ultimo) {
 			this.ordem = ordem;

@@ -6,7 +6,7 @@ plugins {
 
 group = 'br.com.softblue.bluefood'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '13'
+sourceCompatibility = '8'
 
 configurations {
 	developmentOnly
