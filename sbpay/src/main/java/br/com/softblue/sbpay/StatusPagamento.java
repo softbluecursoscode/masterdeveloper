@@ -26,8 +26,8 @@ package br.com.softblue.sbpay;
 public enum StatusPagamento {
 
 	Autorizado("Autorizado"),
-	NaoAutorizado("N„o autorizado pela instituiÁ„o financeira"),
-	CartaoInvalido("Cart„o inv·lido ou bloqueado");
+	NaoAutorizado("N√£o autorizado pela institui√ß√£o financeira"),
+	CartaoInvalido("Cart√£o inv√°lido ou bloqueado");
 	
 	String descricao;
 	

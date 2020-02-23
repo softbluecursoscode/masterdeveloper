@@ -27,7 +27,7 @@ import javax.validation.constraints.Pattern;
 
 public class DadosCartao {
 
-	@Pattern(regexp = "\\d{16}", message = "O número do cartão é inválido")
+	@Pattern(regexp = "\\d{16}", message = "O nÃºmero do cartÃ£o Ã© invÃ¡lido")
 	private String numCartao;
 	
 	public String getNumCartao() {
